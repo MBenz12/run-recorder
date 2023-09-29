@@ -29,20 +29,40 @@ struct TimerClockView: View {
     }
 }
 
+struct TextThatLooksLikeButton: View {
+    let text: String
+    var body: some View {
+        Text(text)
+            .padding()
+            .frame(minWidth: 120)
+            .background(.blue)
+            .cornerRadius(15)
+    }
+}
+
 struct ContentView: View {
     @StateObject var vm = ViewModel()
     
     var body: some View {
         VStack {
             TimerClockView(totalTime: vm.currentTime)
-            Button{
-                // Start recording run
-                
-                vm.runTimer()
-            } label: {
-                Text("Start")
+
+            switch vm.timerState {
+            case .ready:
+                TextThatLooksLikeButton(text: "Start")
+                    .onTapGesture {
+                        vm.runTimer()
+                    }
+                    
+            case .isRunning:
+                TextThatLooksLikeButton(text: "Hold to stop")
+                    .onLongPressGesture {
+                        vm.stopTimer()
+                    }
             }
+                
         }
+        
         .padding()
     }
 }
