@@ -19,9 +19,15 @@ class ViewModel: ObservableObject {
     
     func runTimer() {
         if timerState == .ready {
+            timerState = .isRunning
             self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 self.currentTime += 1
             }
         }
+    }
+    func stopTimer() {
+        timerState = .ready
+        self.currentTime = 0
+        self.timer.invalidate()
     }
 }

@@ -47,6 +47,8 @@
 		6685C5EA2AC24DBF005947A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6685C5ED2AC24DBF005947A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6685C5F82AC25FAF005947A4 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		8402204F2AE6042200C98497 /* WatchTimer-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WatchTimer-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		840220502AE604D900C98497 /* WatchTimer Watch AppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WatchTimer Watch AppDebug.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,8 @@
 		6685C5E52AC24DBD005947A4 /* WatchTimer Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				840220502AE604D900C98497 /* WatchTimer Watch AppDebug.entitlements */,
+				8402204F2AE6042200C98497 /* WatchTimer-Watch-App-Info.plist */,
 				6685C5F82AC25FAF005947A4 /* ViewModel.swift */,
 				6685C5E62AC24DBD005947A4 /* WatchTimerApp.swift */,
 				6685C5E82AC24DBD005947A4 /* ContentView.swift */,
@@ -326,12 +330,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WatchTimer Watch App/WatchTimer Watch AppDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchTimer Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 6SFM579B5E;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchTimer-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchTimer;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -359,9 +365,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WatchTimer Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = 6SFM579B5E;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchTimer-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = WatchTimer;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
