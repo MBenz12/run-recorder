@@ -1,14 +1,14 @@
 //
-//  WatchTimerApp.swift
-//  WatchTimer Watch App
+//  neverstopApp.swift
+//  neverstop Watch App
 //
-//  Created by Adam Reed on 9/25/23.
+//  Created by admin on 10/24/23.
 //
 
 import SwiftUI
 
 @main
-struct WatchTimer_Watch_AppApp: App {
+struct neverstop_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
