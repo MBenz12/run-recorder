@@ -93,7 +93,6 @@
 				845943002AE808EA00BAF4F2 /* neverstop-Watch-App-Info.plist */,
 				845942FF2AE808E400BAF4F2 /* neverstop Watch App.entitlements */,
 				845942EA2AE8085A00BAF4F2 /* neverstopApp.swift */,
-				845942EC2AE8085A00BAF4F2 /* ContentView.swift */,
 				845942EE2AE8085C00BAF4F2 /* Assets.xcassets */,
 				845942F02AE8085C00BAF4F2 /* Preview Content */,
 			);
@@ -128,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				845943052AE811B700BAF4F2 /* ElapsedTimeView.swift */,
+				845942EC2AE8085A00BAF4F2 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
