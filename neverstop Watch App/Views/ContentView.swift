@@ -12,9 +12,10 @@ struct ContentView: View {
     @EnvironmentObject var workoutManager: WorkoutManager
     @GestureState private var isDetectingLongPress = false
     @State private var completedLongPress = false
+    @State private var longPressDuration = 5.0
 
     var longPress: some Gesture {
-        LongPressGesture(minimumDuration: 5)
+        LongPressGesture(minimumDuration: longPressDuration)
             .updating($isDetectingLongPress) { currentState, gestureState, transaction in
                 gestureState = currentState
                 transaction.animation = Animation.easeInOut(duration: 2)
