@@ -74,7 +74,7 @@ class WorkoutManager: NSObject, ObservableObject {
             HKQuantityType.quantityType(forIdentifier: .heartRate)!,
             HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
             HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-            HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
+//            HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
             HKObjectType.activitySummaryType()
         ]
 
