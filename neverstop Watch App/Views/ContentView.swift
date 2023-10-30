@@ -8,22 +8,23 @@
 import SwiftUI
 import HealthKit
 
-struct TextThatLooksLikeButton: View {
-    let text: String
-    var body: some View {
-        GeometryReader { geometry in
-            Text(text)
-                .font(.system(size: 30))
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color.blue)
-                .cornerRadius(15)
-        }
-    }
-}
-
 struct ContentView: View {
     @EnvironmentObject var workoutManager: WorkoutManager
-    
+    @GestureState private var isDetectingLongPress = false
+    @State private var completedLongPress = false
+
+    var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 5)
+            .updating($isDetectingLongPress) { currentState, gestureState, transaction in
+                gestureState = currentState
+                transaction.animation = Animation.easeInOut(duration: 2)
+                self.completedLongPress = false;
+            }
+            .onEnded { finished in
+                self.completedLongPress = finished
+                self.workoutManager.togglePause()
+            }
+    }
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 20) {
@@ -32,20 +33,30 @@ struct ContentView: View {
                     ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
                 }
                 if workoutManager.running == false {
-                    TextThatLooksLikeButton(text: "Start")
-                        .onTapGesture {
-                            workoutManager.selectedWorkout = .running;
-                            workoutManager.togglePause()
-                        }
-                        .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                    Button(action: {
+                        self.completedLongPress = false
+                        workoutManager.selectedWorkout = .running;
+                        workoutManager.togglePause()
+                    }) {
+                        Text("Start")
+                            .font(.system(size: 25))
+                            .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                            .background(Color.blue)
+                            .cornerRadius(15)
+                    }
+                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                    .cornerRadius(15)
                 }
                 else {
-                    TextThatLooksLikeButton(text: "Hold to stop")
-                        .onLongPressGesture(minimumDuration: 5) {
-                            //workoutManager.endWorkout()
-                            workoutManager.togglePause()
-                        }
+                    Text("Hold to stop")
+                        .font(.system(size: 25))
+                        .gesture(longPress)
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                        .background(self.isDetectingLongPress ?
+                                 Color.red :
+                                 (self.completedLongPress ? Color.blue : Color.green))
+                        .cornerRadius(15)
+                        .scaleEffect(isDetectingLongPress ? 0.95 : 1.0)
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)

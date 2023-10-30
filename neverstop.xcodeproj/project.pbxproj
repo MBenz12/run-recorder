@@ -15,6 +15,7 @@
 		845942FE2AE808D300BAF4F2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 845942FD2AE808D300BAF4F2 /* HealthKit.framework */; };
 		845943032AE80A8900BAF4F2 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845943022AE80A8900BAF4F2 /* WorkoutManager.swift */; };
 		845943062AE811B700BAF4F2 /* ElapsedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845943052AE811B700BAF4F2 /* ElapsedTimeView.swift */; };
+		84AFF3142AEB156400A34161 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFF3132AEB156300A34161 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		845943002AE808EA00BAF4F2 /* neverstop-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "neverstop-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		845943022AE80A8900BAF4F2 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		845943052AE811B700BAF4F2 /* ElapsedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElapsedTimeView.swift; sourceTree = "<group>"; };
+		84AFF3132AEB156300A34161 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				845943052AE811B700BAF4F2 /* ElapsedTimeView.swift */,
 				845942EC2AE8085A00BAF4F2 /* ContentView.swift */,
+				84AFF3132AEB156300A34161 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				845943062AE811B700BAF4F2 /* ElapsedTimeView.swift in Sources */,
+				84AFF3142AEB156400A34161 /* TestView.swift in Sources */,
 				845942ED2AE8085A00BAF4F2 /* ContentView.swift in Sources */,
 				845942EB2AE8085A00BAF4F2 /* neverstopApp.swift in Sources */,
 				845943032AE80A8900BAF4F2 /* WorkoutManager.swift in Sources */,
