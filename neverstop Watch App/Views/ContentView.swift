@@ -23,7 +23,7 @@ struct ContentView: View {
             }
             .onEnded { finished in
                 self.completedLongPress = finished
-                self.workoutManager.togglePause()
+                self.workoutManager.endWorkout()
             }
     }
     var body: some View {
