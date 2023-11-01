@@ -37,7 +37,6 @@ struct ContentView: View {
                     Button(action: {
                         self.completedLongPress = false
                         workoutManager.selectedWorkout = .running;
-                        workoutManager.togglePause()
                     }) {
                         Text("Start")
                             .font(.system(size: 25))
