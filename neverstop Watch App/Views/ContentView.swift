@@ -18,7 +18,7 @@ struct ContentView: View {
         LongPressGesture(minimumDuration: longPressDuration)
             .updating($isDetectingLongPress) { currentState, gestureState, transaction in
                 gestureState = currentState
-                transaction.animation = Animation.easeInOut(duration: 2)
+                transaction.animation = Animation.easeInOut(duration: longPressDuration)
                 self.completedLongPress = false;
             }
             .onEnded { finished in
