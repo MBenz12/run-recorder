@@ -28,38 +28,52 @@ struct ContentView: View {
     }
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 20) {
-                TimelineView(MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
-                                                     isPaused: workoutManager.session?.state == .paused)) { context in
-                    ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
-                }
-                if workoutManager.running == false {
-                    Button(action: {
-                        self.completedLongPress = false
-                        workoutManager.selectedWorkout = .running;
-                    }) {
-                        Text("Start")
-                            .font(.system(size: 25))
-                            .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                            .background(Color.blue)
-                            .cornerRadius(15)
+            if workoutManager.authorizationGranted {
+                VStack(spacing: 20) {
+                    TimelineView(MetricsTimelineSchedule(from: workoutManager.builder?.startDate ?? Date(),
+                                                         isPaused: workoutManager.session?.state == .paused)) { context in
+                        ElapsedTimeView(elapsedTime: workoutManager.builder?.elapsedTime(at: context.date) ?? 0, showSubseconds: context.cadence == .live)
                     }
-                    .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                    .cornerRadius(15)
-                }
-                else {
-                    Text("Hold to stop")
-                        .font(.system(size: 25))
-                        .gesture(longPress)
+                    if workoutManager.running == false {
+                        Button(action: {
+                            self.completedLongPress = false
+                            workoutManager.selectedWorkout = .running;
+                        }) {
+                            Text("Start")
+                                .font(.system(size: 25))
+                                .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                                .background(Color.blue)
+                                .cornerRadius(15)
+                        }
                         .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                        .background(self.isDetectingLongPress ?
-                                 Color.red :
-                                 (self.completedLongPress ? Color.blue : Color.green))
                         .cornerRadius(15)
-                        .scaleEffect(isDetectingLongPress ? 0.95 : 1.0)
+                    }
+                    else {
+                        Text("Hold to stop")
+                            .font(.system(size: 25))
+                            .gesture(longPress)
+                            .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
+                            .background(self.isDetectingLongPress ?
+                                        Color.red :
+                                            (self.completedLongPress ? Color.blue : Color.green))
+                            .cornerRadius(15)
+                            .scaleEffect(isDetectingLongPress ? 0.95 : 1.0)
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+            } else {
+                VStack(alignment: .leading){
+                    Text("⚠️ Oops! It seems some required permissions are not enabled for this app. Go to the 'Settings' app to grant access and unlock all features.")
+                    
+                    Spacer()
+                    Button {
+                        workoutManager.checkAuthorizationStatus()
+                    } label: {
+                        Text("Check Granted")
+                    }
+                    
                 }
             }
-            .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .onAppear {
             workoutManager.requestAuthorization()
