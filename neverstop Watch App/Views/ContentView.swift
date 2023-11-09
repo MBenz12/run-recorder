@@ -53,11 +53,16 @@ struct ContentView: View {
                             .font(.system(size: 25))
                             .gesture(longPress)
                             .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
-                            .background(self.isDetectingLongPress ?
-                                        Color.red :
-                                            (self.completedLongPress ? Color.blue : Color.green))
+                            .background {
+                                VStack {
+                                    RoundedRectangle(cornerRadius: 12.0)
+                                        .fill(Color.red.opacity(1.0))
+                                        .frame(maxWidth: isDetectingLongPress ? .infinity : 0)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .background(completedLongPress ? Color.red : Color.green.opacity(1.0))
+                            }
                             .cornerRadius(15)
-                            .scaleEffect(isDetectingLongPress ? 0.95 : 1.0)
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
