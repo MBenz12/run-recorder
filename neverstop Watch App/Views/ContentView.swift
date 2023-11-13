@@ -18,7 +18,7 @@ struct ContentView: View {
         LongPressGesture(minimumDuration: longPressDuration)
             .updating($isDetectingLongPress) { currentState, gestureState, transaction in
                 gestureState = currentState
-                transaction.animation = Animation.easeInOut(duration: longPressDuration)
+                transaction.animation = Animation.linear(duration: longPressDuration)
                 self.completedLongPress = false;
             }
             .onEnded { finished in
@@ -55,7 +55,7 @@ struct ContentView: View {
                             .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.5)
                             .background {
                                 VStack {
-                                    RoundedRectangle(cornerRadius: 12.0)
+                                    Rectangle()
                                         .fill(Color.red.opacity(1.0))
                                         .frame(maxWidth: isDetectingLongPress ? .infinity : 0)
                                         .frame(maxWidth: .infinity, alignment: .leading)
