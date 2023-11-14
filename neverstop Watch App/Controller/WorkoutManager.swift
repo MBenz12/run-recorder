@@ -61,27 +61,63 @@ class WorkoutManager: NSObject, ObservableObject {
             // The workout has started.
         }
     }
+    
+    @Published var authorizationGranted = false
+    
+    // The quantity type to write to the health store.
+    let typesToShare: Set = [
+        HKQuantityType.workoutType()
+    ]
+
+    // The quantity types to read from the health store.
+    let typesToRead: Set = [
+        HKQuantityType.quantityType(forIdentifier: .heartRate)!,
+        HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
+        HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+//        HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
+        HKObjectType.activitySummaryType()
+    ]
 
     // Request authorization to access HealthKit.
     func requestAuthorization() {
-        // The quantity type to write to the health store.
-        let typesToShare: Set = [
-            HKQuantityType.workoutType()
-        ]
-
-        // The quantity types to read from the health store.
-        let typesToRead: Set = [
-            HKQuantityType.quantityType(forIdentifier: .heartRate)!,
-            HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)!,
-            HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-            HKQuantityType.quantityType(forIdentifier: .distanceCycling)!,
-            HKObjectType.activitySummaryType()
-        ]
-
-        // Request authorization for those quantity types.
-        healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
-            // Handle error.
+        if HKHealthStore.isHealthDataAvailable() {
+            // Request authorization for those quantity types.
+            healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead) { (success, error) in
+                // Handle error.
+                if success {
+                    print("Authorization granted")
+                    DispatchQueue.main.async {
+                        self.checkAuthorizationStatus()
+                    }
+                } else {
+                    print("Authorization denied or error: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
         }
+    }
+    
+    // Check required authorization granted
+    func checkAuthorizationStatus() {
+        authorizationGranted = isAuthorizationGranted()
+    }
+    
+    func isAuthorizationGranted() -> Bool {
+        for type in typesToShare {
+            let authorizationStatus = healthStore.authorizationStatus(for: type)
+            if authorizationStatus != .sharingAuthorized {
+                print("Write access denied")
+                return false
+            }
+        }
+        
+        for type in typesToRead {
+            let authorizationStatus = healthStore.authorizationStatus(for: type)
+            if authorizationStatus == .notDetermined {
+                print("Read access not determined: \(type)")
+                return false
+            }
+        }
+        return true;
     }
 
     // MARK: - Session State Control

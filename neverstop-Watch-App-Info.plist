@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Health Update Usage Description</string>
+	<string>We need access to update your health data for...</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Health Share Usage Description</string>
+	<string>We need access to your health data for...</string>
 	<key>UIBackgroundModes</key>
 	<array/>
 	<key>WKBackgroundModes</key>
